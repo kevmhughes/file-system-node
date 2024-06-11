@@ -9,7 +9,11 @@ async function contributorsWithAMistake(){
     const fileContent = await fs.promises.readFile("./hacienda.json", "utf-8");
 
     const parsedData = JSON.parse(fileContent);
-    console.log(parsedData);
+
+    parsedData.forEach(name => {
+        console.log(name.nombre);
+    });
+    // console.log(parsedData);
 }
 
 contributorsWithAMistake();
