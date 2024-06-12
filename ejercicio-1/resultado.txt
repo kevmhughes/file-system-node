@@ -1,0 +1,3 @@
+El/la contribuyente Luis Rodríguez tiene notificaciones pendientes. Se enviara un mail a luis.rodriguez@ejemplo.com.
+El/la contribuyente Alejandro López tiene notificaciones pendientes. Se enviara un mail a alejandro.lopez@ejemplo.com.
+El/la contribuyente Pedro López tiene notificaciones pendientes. Se enviara un mail a pedro.lopez@ejemplo.com.
