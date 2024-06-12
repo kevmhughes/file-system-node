@@ -12,7 +12,6 @@ fs.readdir(folderPath, (err, files) => {
     });
   }
 
-  console.log(filesArr);
   for (let i = 0; i < filesArr.length; i++) {
     // reads file
     const fileContent = fs.readFileSync(`./files/${filesArr[i]}`, "utf-8");
@@ -20,7 +19,10 @@ fs.readdir(folderPath, (err, files) => {
     // orders content and creates an array
     const getDataArr = fileContent.split("\n");
     const getSpecificDataArr = [];
-    const date = filesArr[i].split("_")[0].slice(0,1) + " " + filesArr[i].split("_")[0].slice(1)
+    const date =
+      filesArr[i].split("_")[0].slice(0, 1) +
+      " " +
+      filesArr[i].split("_")[0].slice(1);
 
     // creates an array of arrays to facilitate access to data
     getDataArr.forEach((i) => {
