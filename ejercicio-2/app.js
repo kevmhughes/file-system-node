@@ -37,6 +37,7 @@ fs.readdir(folderPath, (err, files) => {
       ) {
         // creates message to be sent
         const message = `${getSpecificDataArr[i][0]} asistió durante un total de ${getSpecificDataArr[i][2]} minutos el ${date}\n`;
+        
         // appends message to file
         fs.appendFile("informe.txt", message, (err) => {
           if (err) {
