@@ -20,7 +20,7 @@ fs.readdir(folderPath, (err, files) => {
     const getDataArr = fileContent.split("\n");
 
     const getSpecificDataArr = [];
-    
+
     // creates date - taken from file name 
     const date =
       filesArr[i].split("_")[0].slice(0, 1) +
@@ -42,13 +42,7 @@ fs.readdir(folderPath, (err, files) => {
         const message = `${getSpecificDataArr[i][0]} asistió durante un total de ${getSpecificDataArr[i][2]} minutos el ${date}\n`;
         
         // appends message to file
-        fs.appendFile("informe.txt", message, (err) => {
-          if (err) {
-            console.log("Ha ocurrido un error: ", err);
-          } else {
-            console.log("Fichero guardado con éxito.");
-          }
-        });
+        fs.appendFileSync("informe.txt", message);
       }
     }
   }
