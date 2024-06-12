@@ -2,7 +2,7 @@ const fs = require("fs");
 
 const filesArr = [];
 
-// iterates through files folder and pushes file name to filesArr
+// iterates through the files folder and pushes file name to filesArr
 const folderPath = "./files";
 fs.readdir(folderPath, (err, files) => {
   if (err) console.log(err);
@@ -13,12 +13,15 @@ fs.readdir(folderPath, (err, files) => {
   }
 
   for (let i = 0; i < filesArr.length; i++) {
-    // reads file
+    // reads file with dynamic relative path
     const fileContent = fs.readFileSync(`./files/${filesArr[i]}`, "utf-8");
 
-    // orders content and creates an array
+    // orders file content by line into an array
     const getDataArr = fileContent.split("\n");
+
     const getSpecificDataArr = [];
+    
+    // creates date - taken from file name 
     const date =
       filesArr[i].split("_")[0].slice(0, 1) +
       " " +
