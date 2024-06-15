@@ -1,49 +1,34 @@
 const fs = require("fs");
 
-const filesArr = [];
+// creates file paths
+function getFilePaths() {
+  const folder = fs.readdirSync("./files");
+  folder.forEach((i) => {
+    const filePath = i;
+    readAllContents(filePath);
+  });
+}
 
-// iterates through the files folder and pushes file name to filesArr
-const folderPath = "./files";
-fs.readdir(folderPath, (err, files) => {
-  if (err) console.log(err);
-  else {
-    files.forEach((file) => {
-      filesArr.push(file);
-    });
-  }
+// gets the contents of the files and dates
+function readAllContents(filePath) {
+  const fileData = fs.readFileSync(`./files/${filePath}`, "utf-8");
+  const date =
+    filePath.split("_")[0].slice(0, 1) + " de " + filePath.split("_")[0].slice(1);
+  const fileDataArrays = fileData.split("\n");
+  dataArraysByLine = fileDataArrays.forEach((i) => {
+    const dataArraysByLine = i.split(",");
+    sendMessage(dataArraysByLine, date);
+  });
+}
 
-  for (let i = 0; i < filesArr.length; i++) {
-    // reads file with dynamic relative path
-    const fileContent = fs.readFileSync(`./files/${filesArr[i]}`, "utf-8");
+// creates the message and the report
+function sendMessage(dataArraysByLine, date) {
+  const name = dataArraysByLine[0];
+  const minutes = dataArraysByLine[2];
+  const message =
+    name + " ha asistido durante " + minutes + " minutes" + " el " + date + "\n";
 
-    // orders file content by line into an array
-    const getDataArr = fileContent.split("\n");
+  fs.appendFileSync("informe.txt", message);
+}
 
-    const getSpecificDataArr = [];
-
-    // creates date - taken from file name 
-    const date =
-      filesArr[i].split("_")[0].slice(0, 1) +
-      " " +
-      filesArr[i].split("_")[0].slice(1);
-
-    // creates an array of arrays to facilitate access to data
-    getDataArr.forEach((i) => {
-      getSpecificDataArr.push(i.split(","));
-    });
-
-    for (let i = 0; i < getSpecificDataArr.length; i++) {
-      if (
-        // removes teacher and empty array indices
-        getSpecificDataArr[i].length > 1 &&
-        getSpecificDataArr[i][3] == "Sí"
-      ) {
-        // creates message to be sent
-        const message = `${getSpecificDataArr[i][0]} asistió durante un total de ${getSpecificDataArr[i][2]} minutos el ${date}\n`;
-        
-        // appends message to file
-        fs.appendFileSync("informe.txt", message);
-      }
-    }
-  }
-});
+getFilePaths();
